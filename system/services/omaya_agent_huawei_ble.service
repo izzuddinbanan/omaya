@@ -1,0 +1,20 @@
+[Unit]
+Description=Omaya Agent [Huawei-ble] Service
+After=network.target mariadb.service redis.service mosquitto.service
+
+[Service]
+Type=forking
+
+WorkingDirectory=/var/www/omaya/system/daemon/huawei
+
+ExecStart=/usr/bin/env php /var/www/omaya/system/daemon/huawei/omaya_agent_huawei_ble.php
+ExecStop=/bin/kill $MAINPID
+ExecReload=/bin/kill -USR1 $MAINPID
+
+Restart=always
+RestartSec=15
+
+PIDFile=/run/omaya-agent-huawei-ble.pid
+
+[Install]
+WantedBy=multi-user.target

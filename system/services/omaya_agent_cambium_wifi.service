@@ -1,0 +1,20 @@
+[Unit]
+Description=Omaya Agent [Cambium-wifi] Service
+After=network.target mariadb.service redis.service mosquitto.service
+
+[Service]
+Type=forking
+
+WorkingDirectory=/var/www/omaya/system/daemon/cambium
+
+ExecStart=/usr/bin/env php /var/www/omaya/system/daemon/cambium/omaya_agent_cambium_wifi.php
+ExecStop=/bin/kill $MAINPID
+ExecReload=/bin/kill -USR1 $MAINPID
+
+Restart=always
+RestartSec=15
+
+PIDFile=/run/omaya-agent-cambium-wifi.pid
+
+[Install]
+WantedBy=multi-user.target

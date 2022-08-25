@@ -1,0 +1,18 @@
+
+
+DEVICE:AP:DATA:{$omy_data['mac_address_ap']
+TENANT:LICENSE:{$omy_ap['tenant_id']}
+
+
+
+## ADD ON INSTALLATION
+
+
+
+dnf install php-pear
+dnf --enablerepo=powertools install libedit-devel
+pecl channel-update pecl.php.net
+
+dnf install php-devel
+dnf install mosquitto
+dnf install php73-php-pecl-mosquitto.x86_64 php-pecl-mosquitto.x86_64
